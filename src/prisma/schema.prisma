@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+  
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  fullName String
+  password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  role UserRole @default(USER)
+  veridied DateTime 
+  cart Cart?
+  verificationCode VerifactionCode?
+
+}
+
+model Cart {
+  id       Int    @id @default(autoincrement())
+  user User @relation(fields: [userId],references: [id])
+  userId Int @unique
+  token String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  products CartProduct[]
+
+}
+model CartProduct{
+  id       Int    @id @default(autoincrement())
+  ingredients Ingrident[]
+  cart Cart @relation(fields: [cartId], references: [id])
+  cartId Int 
+  quantitty Int 
+   variants Variation @relation(fields: [variantId], references: [id])
+  variantId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Product {
+  id       Int    @id @default(autoincrement())
+  name String 
+  imgUrl String
+  variants Variation @relation(fields: [variantId], references: [id])
+  variantId Int
+  category Category @relation(fields: [categoryId],references: [id])
+  categoryId Int
+  ingredients Ingrident[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Ingrident {
+  id       Int    @id @default(autoincrement())
+  products Product[]
+  cartProdcts CartProduct[]
+  price Int
+  name String
+  imgUrl String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Category {
+  id       Int    @id @default(autoincrement())
+  products Product[]
+  name String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Order {
+  id       Int    @id @default(autoincrement())
+  fullName String
+  email  String @unique
+  phone String
+  address String
+  coment String?
+  token String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Variation {
+  id       Int    @id @default(autoincrement())
+  size Int?
+  pizzaType Int?
+  price Int
+  cartProducts cartProduct []
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model VerifactionCode {
+  id       Int    @id @default(autoincrement())
+  code String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user User @relation(fields: [userId],references: [id])
+  userId Int @unique
+}
+enum UserRole {
+  ADMIN                        
+  USER 
+}
+
+enum OrderStatus {
+  PENDING
+  SUCCESS
+  CANCELED
+}
