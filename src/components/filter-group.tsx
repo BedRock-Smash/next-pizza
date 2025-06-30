@@ -8,11 +8,12 @@ interface Props {
     items: any[];
     limit?: number;
     title: string;
-
+    setSelected: (value: number) => void;
+    selected: Set <number>
 }
 
 export const FilterGroup: React.FC<Props> = (props) => {
-    const { className, items, limit, title } = props;
+    const { className, items, limit, title,selected,setSelected } = props;
     return (
         <div className={cn("", className)}>
 
@@ -22,7 +23,7 @@ export const FilterGroup: React.FC<Props> = (props) => {
             <ul>
                 {items.map((el) => (
                     <li key={el.value}>
-                        <FilterChekbox name={el.name} />
+                        <FilterChekbox  name={el.name} setSelected={() =>setSelected} selected={selected.has(el.value)} />
                     </li>
                 ))}
             </ul>
