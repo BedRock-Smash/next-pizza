@@ -6,9 +6,10 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { useCategoryStore } from '@/store/category';
 
+
 interface Props {
     className?: string;
-    items: any[];
+    items: Array <{name:string; id:number }>;
 }
 
 export const Categories: React.FC<Props> = (props) => {
