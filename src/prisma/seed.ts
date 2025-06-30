@@ -9,8 +9,21 @@ async function create() {
             fullName: "Jason Stetxem",
             password: hashSync("goodGame", 10),
             verified: new Date()
+    const user1 = await prisma.user.create({
+        data: {
+            email: "worldOFTanks@gmail.com",
+            fullName: "Jason Stetxem",
+            password: hashSync("goodGame", 10),
+            verified: new Date()
         }
     })
+    const user2 = await prisma.user.create({
+        data: {
+            email: "worldOFTank@gmail.com",
+            fullName: "Hills  Jon",
+            password: hashSync("barev", 10),
+            verified: new Date(),
+            role: "ADMIN"
     const user2 = await prisma.user.create({
         data: {
             email: "worldOFTank@gmail.com",
@@ -21,11 +34,14 @@ async function create() {
         }
     })
     await prisma.category.createMany({
+    await prisma.category.createMany({
         data: categories
     })
     await prisma.product.createMany({
+    await prisma.product.createMany({
         data: products
     })
+    await prisma.ingredient.createMany({
     await prisma.ingredient.createMany({
         data: ingredients
     })
@@ -38,6 +54,29 @@ async function create() {
             categoryId: 1
         }
     })
+    const pizza2 = await prisma.product.create({
+        data: {
+            imgUrl: "/qaxcrs.avif",
+            name: "С гавайским манго",
+            ingredients: { connect: ingredients.slice(5, 10) },
+            categoryId: 1
+        }
+    })
+    const pizza3 = await prisma.product.create({
+        data: {
+            imgUrl: "/Diablo.avif",
+            name: "Креветки и песто",
+            ingredients: { connect: ingredients.slice(10, 15) },
+        data: {
+            imgUrl: "pizza1.avif",
+            name: "Ծովախեցգետին և պեստո",
+            ingredients: { connect: ingredients.slice(0, 5) },
+            categoryId: 1
+        }
+    })
+
+}
+
     const pizza2 = await prisma.product.create({
         data: {
             imgUrl: "/qaxcrs.avif",
@@ -68,15 +107,28 @@ async function main() {
         await reset()
         await create()
     } catch (error) {
+    try {
+        await reset()
+        await create()
+    } catch (error) {
         console.log(error);
+        await prisma.$disconnect()
         await prisma.$disconnect()
 
     }
+
 
 }
 
 
 main()
+    .then(async () => {
+        await prisma.$disconnect()
+    }).catch(async (error) => {
+        console.log(error);
+        await prisma.$disconnect()
+        process.exit(1)
+    })
     .then(async () => {
         await prisma.$disconnect()
     }).catch(async (error) => {

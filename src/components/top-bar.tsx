@@ -7,43 +7,15 @@ import { Container } from './container';
 
 interface Props {
     className?: string;
+    categorise: Array <{name:string; id:number }>
 }
-const items = [
-    {
-        name: "Пиццы",
-
-    },
-    {
-        name: "Мясные",
-
-    },
-    {
-        name: "Острые",
-
-    },
-    {
-        name: "Сладкие",
-
-    },
-    {
-        name: "Вегетарианские",
-
-    },
-    {
-        name: "С курицей",
-
-    }
-].map((el, i) => ({ ...el, id: i + 1 }))
-
-
-
 
 export const TopBar: React.FC<Props> = (props) => {
-    const { className } = props;
+    const { className,categorise } = props;
     return (
         <Container className={cn(" sticky top-2 flex justify-between", className)}>
 
-            <Categories items={items} />
+            <Categories  items={categorise} />
             <SortPopup />
         </Container>
     );
