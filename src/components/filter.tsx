@@ -49,7 +49,7 @@ console.log(selectedIngredients);
             <FilterGroup items={[{ name: 30, value: "маленькая" }, { name: 40, value: "средная" }, { name: 50, value: "большая" }]} title={'Размеры:'} setSelected={setSize} selected={size} />
             
             <FilterGroup items={[{ name: "Традиционное", value: 1 }, { name: "Тонкое", value: 2 }]} title={'Тип Теста:'} setSelected={ setType} selected={type} />
-            <FilterGroup items={niceIngredients} title={'Ингридиенты:'} setSelected={setSeletcedIngredients } selected={selectedIngredients} />
+            <FilterGroup items={niceIngredients} title={'Ингридиенты:'} setSelected={setSeletcedIngredients } selected={selectedIngredients} limit={6} />
         </div>
     );
 }
