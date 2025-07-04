@@ -9,14 +9,14 @@ interface Props {
     className?: string;
     value?:string,
     setValue?: (value:string) => void
+    onFoucs:() => void
 }
 
     
 
 export const Search: React.FC<Props> = (props) => {
-    const { className,setValue,value } = props;
+    const { className,setValue,value ,onFoucs} = props;
     return (
-
     
         <label className={cn("relative flex items-center gap-2", className)}>
             <SearchIcon className='absolute left-1 text-gray-400' />
