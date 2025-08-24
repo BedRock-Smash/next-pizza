@@ -19,8 +19,8 @@ const createVariant = ({
 async function create() {
   const user1 = await prisma.user.create({
     data: {
-      email: "vahegabrielyan2007adwwd@gmail.com",
-      fullName: "Azgosh Jonyan",
+      email: "hayrapetyanarame@gmail.com",
+      fullName: "Hari Potter",
       password: hashSync("Aso", 10),
     },
   });
