@@ -22,14 +22,16 @@ async function create() {
       email: "hayrapetyanarame@gmail.com",
       fullName: "Hari Potter",
       password: hashSync("Aso", 10),
+      verified: new Date(),
     },
   });
   const user2 = await prisma.user.create({
     data: {
-      email: "vahe_gabrielyan2007adwwd@gmail.com",
+      email: "hayrapetyanarame6@gmail.com",
       fullName: "Jovani Spoyan",
       password: hashSync("Alooo", 10),
       role: "ADMIN",
+      verified: new Date(),
     },
   });
   await prisma.category.createMany({

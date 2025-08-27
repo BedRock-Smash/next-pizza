@@ -1,8 +1,5 @@
 import { Header } from "@/components";
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
-
-
 
 export const metadata: Metadata = {
     title: "Next Pizza",

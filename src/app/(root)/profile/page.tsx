@@ -1,8 +1,7 @@
 import { FormProfile } from "@/components";
+import { AccessDenied } from "@/components/access-denied";
 import { getUser } from "@/lib/get-user";
 import { prisma } from "@/prisma/prizma-client";
-import { notFound } from "next/navigation";
-
 export default async function ProfilePage() {
 
     const user = await getUser();
@@ -16,10 +15,11 @@ export default async function ProfilePage() {
         }
     })
 
-     if (!userData) {
-        return notFound()
+    if (!userData) {
+        return(<AccessDenied/>)
 
     }
+
 
     return (
         <FormProfile user = {userData}/>

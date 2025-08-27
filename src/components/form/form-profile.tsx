@@ -10,6 +10,7 @@ import { RegisterFormSchema } from "@/@types/form";
 import toast from "react-hot-toast";
 import { registerProfile } from "@/app/actions/register-profile";
 import { User } from "@prisma/client";
+import { signOut } from "next-auth/react";
 
 interface Props {
   className?: string;
@@ -52,7 +53,15 @@ export const FormProfile: React.FC<Props> = (props) => {
           label="Confirm Password"
           type="password"
         />
+        <div className="flex items-center gap-5"> 
+         
         <Button type="submit">Update</Button>
+        <Button 
+        type="button" 
+        variant={"secondary"} 
+        onClick={async() => await signOut({callbackUrl: "/"})}>Sign out</Button>
+        </div>
+
       </form>
     </FormProvider>
   );
